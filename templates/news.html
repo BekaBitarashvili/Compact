@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>📰 Top Headlines</h2>
+
+    {% if news and news.status == 'ok' %}
+        {% for article in news.articles[:10] %}
+        <div class="card mb-3 shadow p-2">
+            <h5>{{ article.title }}</h5>
+            {% if article.urlToImage %}
+                <img src="{{ article.urlToImage }}" class="img-fluid mb-2">
+            {% endif %}
+            <p>{{ article.description }}</p>
+            <p><a href="{{ article.url }}" target="_blank">Read more</a></p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-danger">No news available.</p>
+    {% endif %}
+</div>
+{% endblock %}
